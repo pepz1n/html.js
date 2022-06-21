@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de endereço</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+</head>
+<body>
+
+    <h1 class="display-1" style="text-align:center ;">Cadastro de endereço</h1>
+    <form class="row g-3" style="margin-left: 5%; margin-right: 5%; margin-top: 2%;" id="formulario">
+        <div class="col-md-6">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="XXXXXXXXX@email.com">
+        </div>
+        <div class="col-md-6">
+            <label for="nome" class="form-label">Nome</label>
+            <input type="text" class="form-control" id="nome" name="nome">
+        </div>                
+        <div class="col-md-6">
+          <label for="numero" class="form-label">Numero</label>
+          <input type="text" class="form-control" id="numero" placeholder="EX: 777" name="numero">
+        </div>
+        <div class="col-md-6">
+          <label for="bairro" class="form-label">Bairro</label>
+          <input type="text" class="form-control" id="bairro" name="bairro">
+        </div>
+        <div class="col-12">
+          <label for="endereco" class="form-label">Endereço</label>
+          <input type="text" class="form-control" id="rua" placeholder="Rua/Avenida" name="rua">
+        </div>
+        <div class="col-md-6">
+          <label for="cidade" class="form-label">Cidade</label>
+          <input type="text" class="form-control" id="cidade" name="cidade">
+        </div>
+        <div class="col-md-4">
+          <label for="estado" class="form-label">Estado</label>
+          <select id="estado" class="form-select" name="estado">
+            <option selected disabled>Escolha</option>
+            <option value="PR">Paraná</option>
+            <option value="SC">Santa Catarina</option>
+            <option value="RS">Rio Grande do Sul</option>
+          </select>
+        </div>
+        <div class="col-md-2">
+          <label for="CEP" class="form-label">CEP</label>
+          <input type="text" class="form-control" id="cep" name="cep">
+        </div>
+        <div class="col-12">
+        </div>
+        <div class="col-12">
+            <button type="reset" class="btn btn-primary">Limpar</button>
+          <button type="submit" class="btn btn-primary">Enviar</button>
+        </div>
+      </form>
+
+      <hr style="margin-top: 35px;">
+
+      <table class="table" id="cadastro" style="font-size:20px ;">
+          <tr>
+            <th>Nome</th>
+            <th>Bairro</th>
+            <th>Rua</th>
+            <th>numero</th>
+            <th>CEP</th>
+            <th>Estado</th>
+          </tr>
+      </table>
+      
+      
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+      
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+      
+      <script src="./index.js"></script>
+  </body>
+</html>
