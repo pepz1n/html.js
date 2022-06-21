@@ -61,7 +61,7 @@ function popularTabelaAoCarrregarPagina(){
     let produtosDoLocalStorage = JSON.parse(localStorage.getItem('endereco'))|| [];
     produtosDoLocalStorage.forEach(endereco =>{
         endereco = JSON.parse(endereco);
-        adicionarProdutoNaTabela(endereco);
+        adicionarProdutoNaTabela(endereco   );
     })
 
 }
