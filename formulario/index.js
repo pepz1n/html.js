@@ -1,9 +1,10 @@
 const formulario = document.getElementById('formulario');
-const cadastros = document.getElementById('cadastro')
+const cadastros = document.getElementById('cadastroTabela')
 
 
 
-popularTabelaAoCarrregarPagina();
+popularTabelaAoCarregarPagina();
+adicionarEventosDosBotoesDeExclusao();
 
 formulario.addEventListener('submit',(evento) => {
     evento.preventDefault();
@@ -12,9 +13,22 @@ formulario.addEventListener('submit',(evento) => {
     let endereco = $('#formulario').serializeArray();
     let endereco2 = arrayToObject(endereco);
 
-    adicionarProdutoNaTabela(endereco2);
+    
 
     let produtos = JSON.parse(localStorage.getItem('endereco')) || []
+    
+    
+    let produtosDuplicados = produtos
+        .map(produtos => (JSON.parse(produtos)).cep)
+        .includes(endereco2.cep);
+
+    if(produtosDuplicados){
+        alert(`Já existe um CEP cadastrado, não e possivel continuar!!`);
+        return
+    }
+
+    adicionarProdutoNaTabela(endereco2);
+    adicionarEventosDosBotoesDeExclusao();
 
     
     produtos.push(JSON.stringify(endereco2))
@@ -47,7 +61,12 @@ function adicionarProdutoNaTabela(endereco3){
             <td>${endereco3.rua}</td>
             <td>${endereco3.numero}</td>
             <td>${endereco3.cep}</td>
-            <td>${endereco3.estado}</td>            
+            <td>${endereco3.estado}</td> 
+            <td>
+                <button class="btn btn-outline-danger exclusao" data-produto="${endereco3.cep}">
+                    Excluir
+                </button> 
+            </td>           
         </tr>    
     `;
     cadastros.appendChild(tr)
@@ -57,11 +76,54 @@ function adicionarProdutoNaTabela(endereco3){
 
 
 
-function popularTabelaAoCarrregarPagina(){
+function popularTabelaAoCarregarPagina(){
     let produtosDoLocalStorage = JSON.parse(localStorage.getItem('endereco'))|| [];
     produtosDoLocalStorage.forEach(endereco =>{
         endereco = JSON.parse(endereco);
-        adicionarProdutoNaTabela(endereco   );
+        adicionarProdutoNaTabela(endereco);
     })
 
+}
+
+
+function adicionarEventosDosBotoesDeExclusao(){
+
+    $('.exclusao').toarray().forEach(botaoExclusao => {
+        botaoExclusao.removeEventListener('click', (evento) => excluirRegistro(evento))
+
+    })
+
+
+    $('.exclusao').toArray().forEach(botaoExclusao => {
+        botaoExclusao.addEventListener('click', (evento) => excluirRegistro(evento))
+    })
+
+
+}
+
+function excluirRegistro(evento) {
+    console.log(evento);
+    let cepParaExcluir = evento.target.dataset.endereco3;
+    if(confirm(`Deseja exluir o produto ${cepParaExcluir}`)){
+        let enderecos = JSON.parse(localStorage.getItem('enderecos')) || [];
+       
+       
+        //percorremos o array de produtos cadastrados e transformamos
+        //cada produto em um objeto (JSON.parse()) por que a gente precisa
+        //acessar as propriedades do produto. sem o JSON.parse() o produto seria
+        //uma string.
+
+
+
+        enderecos = enderecos.map(enderecos => JSON.parse(enderecos))
+
+        let index = enderecos.findindex(enderecos => enderecos.cep == cepParaExcluir)
+
+        enderecos.splice(index, 1);
+
+        enderecos = enderecos.map(endereco3 => JSON.stringify(endereco3));
+        localStorage.setItem('enderecos', JSON.stringify(enderecos));
+        document.location.reload(true);
+
+    }
 }
