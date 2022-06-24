@@ -26,7 +26,7 @@ formulario.addEventListener('submit',(evento) => {
         alert(`Já existe um CEP cadastrado, não e possivel continuar!!`);
         return
     }
-
+    
     adicionarProdutoNaTabela(endereco2);
     adicionarEventosDosBotoesDeExclusao();
 
@@ -88,7 +88,7 @@ function popularTabelaAoCarregarPagina(){
 
 function adicionarEventosDosBotoesDeExclusao(){
 
-    $('.exclusao').toarray().forEach(botaoExclusao => {
+    $('.exclusao').toArray().forEach(botaoExclusao => {
         botaoExclusao.removeEventListener('click', (evento) => excluirRegistro(evento))
 
     })
@@ -103,9 +103,9 @@ function adicionarEventosDosBotoesDeExclusao(){
 
 function excluirRegistro(evento) {
     console.log(evento);
-    let cepParaExcluir = evento.target.dataset.endereco3;
-    if(confirm(`Deseja exluir o produto ${cepParaExcluir}`)){
-        let enderecos = JSON.parse(localStorage.getItem('enderecos')) || [];
+    let cepParaExcluir = evento.target.dataset.endereco2;
+    if(confirm(`Deseja excluir o produto ${cepParaExcluir}`)){
+        let enderecos = JSON.parse(localStorage.getItem('endereco')) || [];
        
        
         //percorremos o array de produtos cadastrados e transformamos
@@ -115,14 +115,14 @@ function excluirRegistro(evento) {
 
 
 
-        enderecos = enderecos.map(enderecos => JSON.parse(enderecos))
+        enderecos = enderecos.map(A => JSON.parse(A))
 
         let index = enderecos.findindex(enderecos => enderecos.cep == cepParaExcluir)
 
         enderecos.splice(index, 1);
 
         enderecos = enderecos.map(endereco3 => JSON.stringify(endereco3));
-        localStorage.setItem('enderecos', JSON.stringify(enderecos));
+        localStorage.setItem('endereco', JSON.stringify(enderecos));
         document.location.reload(true);
 
     }
